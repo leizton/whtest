@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.function.BiConsumer;
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 /**
  * 2018/5/6
@@ -13,11 +13,11 @@ import java.util.function.Function;
 public class FileUtil {
   private static final Logger LOG = LoggerFactory.getLogger(FileUtil.class);
 
-  public static void processEachLine(String filename, Function<String, Boolean> proc) throws IOException {
+  public static void processEachLine(String filename, BiFunction<Integer, String, Boolean> proc) throws IOException {
     try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-      String line;
-      while ((line = reader.readLine()) != null) {
-        if (!proc.apply(line)) {
+      int lineNum = 0;
+      for (String line; (line = reader.readLine()) != null; lineNum++) {
+        if (!proc.apply(lineNum, line)) {
           break;
         }
       }
