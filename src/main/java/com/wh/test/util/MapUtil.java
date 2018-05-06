@@ -22,6 +22,10 @@ public class MapUtil {
     return new MapBuilder<>(new TreeMap<>());
   }
 
+  public static <K, V> MapBuilder<K, V, TreeMap<K, V>> newTreeMap() {
+    return new MapBuilder<>(new TreeMap<>());
+  }
+
   public static <K, V> MapBuilder<K, V, ConcurrentMap<K, V>> newConcurrentMap() {
     return new MapBuilder<>(new ConcurrentHashMap<>());
   }

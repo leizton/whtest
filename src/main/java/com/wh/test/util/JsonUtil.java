@@ -18,7 +18,7 @@ public class JsonUtil {
     try {
       return Optional.of(MAPPER.readValue(json, clz));
     } catch (Exception e) {
-      LOG.error("parse {} exception: {}", clz.getCanonicalName(), json, e);
+      LOG.error("parse exception. clz={}", clz.getCanonicalName(), e);
       return Optional.empty();
     }
   }
@@ -27,8 +27,17 @@ public class JsonUtil {
     try {
       return Optional.of(MAPPER.readValue(json, clz));
     } catch (Exception e) {
-      LOG.error("parse {} exception: {}", clz.getCanonicalName(), new String(json), e);
+      LOG.error("parse exception. clz={}", clz.getCanonicalName(), e);
       return Optional.empty();
+    }
+  }
+
+  public static String toJson(Object obj) {
+    try {
+      return MAPPER.writeValueAsString(obj);
+    } catch (Exception e) {
+      LOG.error("jsonSer exception. clz={}", obj.getClass().getCanonicalName());
+      return "{}";
     }
   }
 }
