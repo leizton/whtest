@@ -2,12 +2,12 @@ package com.wh.test.util;
 
 import com.google.common.base.Strings;
 
-import java.util.Objects;
 import java.util.TreeMap;
 
 /**
  * 2018/5/21
  */
+@SuppressWarnings("WeakerAccess")
 public class TrieTree {
 
   private Node root = new Node('\0', 0, null);
@@ -36,7 +36,6 @@ public class TrieTree {
     return new String(buf);
   }
 
-  @SuppressWarnings("WeakerAccess")
   public static final class Node implements Comparable<Node> {
     public char c;
     private short level;
