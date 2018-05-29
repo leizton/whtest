@@ -26,11 +26,11 @@ public class FileUtil {
 
   public static BiConsumer<String, Boolean> createWriter(String filename) throws IOException {
     BufferedWriter rawWriter = new BufferedWriter(new FileWriter(filename));
-    return (line, writeCompleted) -> {
+    return (line, isContinueWrite) -> {
       try {
         rawWriter.write(line);
         rawWriter.newLine();
-        if (writeCompleted) {
+        if (!isContinueWrite) {
           rawWriter.close();
         }
       } catch (IOException e) {
