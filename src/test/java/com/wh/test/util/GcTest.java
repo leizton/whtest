@@ -16,8 +16,8 @@ public class GcTest {
   }
 
   private static final class Test {
-    private static final AtomicInteger ID = new AtomicInteger(0);
-    private final int id = ID.getAndIncrement();
+    private static final AtomicInteger ID_GEN = new AtomicInteger(0);
+    private final int id = ID_GEN.getAndIncrement();
 
     @Override
     public String toString() {
