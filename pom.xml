@@ -92,6 +92,12 @@
             <version>2.10.4</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.rocksdb</groupId>
+            <artifactId>rocksdbjni</artifactId>
+            <version>5.13.3</version>
+        </dependency>
+
         <!-- others -->
         <dependency>
             <groupId>org.apache.commons</groupId>
