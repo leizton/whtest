@@ -17,9 +17,11 @@ public class QpsUtil implements TimerTask {
   private static final Logger LOG = LoggerFactory.getLogger(QpsUtil.class);
 
   private static final HashedWheelTimer timer = new HashedWheelTimer(
-      new NamedThreadFactory("intqps"), 500, TimeUnit.MILLISECONDS, 16);
+      new NamedThreadFactory("intqps"), 100, TimeUnit.MILLISECONDS, 10);
 
+  private final String name;
   private final long periodSeconds;
+  private final boolean printLog;
   private final AtomicLong sum = new AtomicLong(0);
   private volatile long lastSum = 0;
   private volatile int qps = 0;
@@ -30,7 +32,13 @@ public class QpsUtil implements TimerTask {
   }
 
   public QpsUtil(long periodSeconds) {
+    this("", periodSeconds, false);
+  }
+
+  public QpsUtil(String name, long periodSeconds, boolean printLog) {
+    this.name = name;
     this.periodSeconds = periodSeconds;
+    this.printLog = printLog;
     lastTime = System.currentTimeMillis() / 1000;
     timer.newTimeout(this, periodSeconds, TimeUnit.SECONDS);
   }
@@ -61,6 +69,9 @@ public class QpsUtil implements TimerTask {
         long tmp = sum.get();
         qps = (int) ((tmp - lastSum) / (currTime - lastTime));
         lastSum = tmp;
+        if (printLog) {
+          LOG.info("qps-{}: " + qps, name);
+        }
       }
     } catch (Exception e) {
       LOG.info("intqps refresh exception", e);
