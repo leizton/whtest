@@ -1,5 +1,8 @@
 package com.wh.test.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -9,6 +12,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class NamedThreadFactory implements ThreadFactory {
+  private static final Logger LOG = LoggerFactory.getLogger(NamedThreadFactory.class);
+
   private static final AtomicInteger POOL_SEQ = new AtomicInteger(1);
 
   private final AtomicInteger mThreadNum = new AtomicInteger(1);
@@ -37,9 +42,10 @@ public class NamedThreadFactory implements ThreadFactory {
   @SuppressWarnings("NullableProblems")
   public Thread newThread(Runnable runnable) {
     String name = mPrefix + mThreadNum.getAndIncrement();
-    Thread ret = new Thread(mGroup, runnable, name, 0);
-    ret.setDaemon(mDaemon);
-    return ret;
+    Thread th = new Thread(mGroup, runnable, name, 0);
+    th.setDaemon(mDaemon);
+    LOG.info("create thread: {}", th.getName());
+    return th;
   }
 
   public ThreadGroup getThreadGroup() {
