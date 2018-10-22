@@ -1,4 +1,4 @@
-package com.wh.test.util;
+package com.wh.test.util.java.detail;
 
 /**
  * 2018/9/5
@@ -18,6 +18,7 @@ public class L1CacheTest {
     long sum1 = 0;
     long time1 = System.currentTimeMillis();
     for (int i = 0; i < colnum; i++) {
+      // l1 cache hit
       for (int j = 0; j < rownum; j++) {
         sum1 += mat[i][j];
       }
@@ -27,6 +28,7 @@ public class L1CacheTest {
     long sum2 = 0;
     long time2 = System.currentTimeMillis();
     for (int i = 0; i < rownum; i++) {
+      // l1 cache miss
       for (int j = 0; j < colnum; j++) {
         sum2 += mat[j][i];
       }
@@ -35,7 +37,7 @@ public class L1CacheTest {
 
     System.out.println(sum1);
     System.out.println(sum2);
-    System.out.println(time1);
-    System.out.println(time2);
+    System.out.println(time1);  // 16ms
+    System.out.println(time2);  // 50ms
   }
 }

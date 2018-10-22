@@ -45,8 +45,16 @@ public class ForkJoinPoolTest {
       LOG.info("{}s: {}, {}, {}", aid('-'), parentId, id, num);
       Task t1 = new Task(id, level + 1, num >> 1);
       Task t2 = new Task(id, level + 1, num - (num >> 1));
+      /*
+       * t1.fork(); t2.fork(); 是错误用法
+       * invokeAll() 才是正确用法
+       * 原因查看源码
+       */
+//      t1.fork(); t2.fork();
       invokeAll(t1, t2);
-      return t1.join() + t2.join();
+      int ret = t1.join() + t2.join();
+      LOG.info("{}r: {}, {}, {}", aid('_'), parentId, id, ret);
+      return ret;
     }
 
     private String aid(char c) {

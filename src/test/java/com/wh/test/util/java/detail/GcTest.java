@@ -1,4 +1,4 @@
-package com.wh.test.util;
+package com.wh.test.util.java.detail;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -13,6 +13,7 @@ public class GcTest {
     System.out.println("before gc");
     System.gc();
     System.out.println("after gc");
+    // 在after gc后，t1.finalize被调用了, t2.finalize未被调用
   }
 
   private static final class Test {

@@ -5,9 +5,9 @@ import java.util.concurrent.TimeUnit;
 /**
  * 2018/6/19
  */
-class TestUtil {
+public class TestUtil {
 
-  static void sleepSec(int sec) {
+  public static void sleepSec(int sec) {
     try {
       Thread.sleep(TimeUnit.SECONDS.toMillis(sec));
     } catch (Exception ignore) {

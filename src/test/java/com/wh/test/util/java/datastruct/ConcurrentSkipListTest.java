@@ -1,4 +1,6 @@
-package com.wh.test.util;
+package com.wh.test.util.java.datastruct;
+
+import com.wh.test.util.ShuffleUtil;
 
 import java.util.Arrays;
 import java.util.concurrent.ConcurrentSkipListSet;
@@ -15,8 +17,9 @@ public class ConcurrentSkipListTest {
     for (int i = 0; i < NUM; i++) {
       src[i] = i;
     }
-    ShuffleUtil.shuffle(src);
+    ShuffleUtil.shuffle(src);  // 使得src是无序数组
 
+    // 统计对src排序用时
     long t1 = System.currentTimeMillis();
     for (int i = 0; i < 100; i++) {
       int[] tmp = Arrays.copyOf(src, src.length);
@@ -26,6 +29,7 @@ public class ConcurrentSkipListTest {
     }
     t1 = System.currentTimeMillis() - t1;
 
+    // 统计把src元素逐个add到ConcSkipListSet用时
     long t2 = System.currentTimeMillis();
     for (int i = 0; i < 100; i++) {
       ConcurrentSkipListSet<Integer> set = new ConcurrentSkipListSet<>();
