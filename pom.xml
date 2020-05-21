@@ -9,8 +9,8 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <java_source_version>1.8</java_source_version>
-        <java_target_version>1.8</java_target_version>
+        <java_source_version>1.12</java_source_version>
+        <java_target_version>1.12</java_target_version>
     </properties>
 
     <dependencies>

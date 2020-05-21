@@ -8,6 +8,24 @@ import org.junit.Test;
  */
 public class CryptTest {
 
+  public static void main(String[] args) throws Exception {
+    final var path = "";
+    final var cryptPath = path + ".cyt";
+
+    final var key = ("crypt_data").getBytes();
+    var src = FileUtil.readFile(path);
+    var crypted = CryptUtil.encryptAES(key, src);
+    FileUtil.writeFile(cryptPath, crypted);
+
+    crypted = FileUtil.readFile(cryptPath);
+    var decrypt = CryptUtil.decryptAES(key, crypted);
+    for (int i = 0; i < src.length; i++) {
+      if (src[i] != decrypt[i]) {
+        System.out.println("error");
+      }
+    }
+  }
+
   @Test
   public void test() throws Exception {
     byte[] text = "abcd1234".getBytes();
