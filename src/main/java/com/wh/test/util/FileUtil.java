@@ -10,6 +10,7 @@ import java.util.function.BiFunction;
 /**
  * 2018/5/6
  */
+@SuppressWarnings("unused")
 public class FileUtil {
   private static final Logger LOG = LoggerFactory.getLogger(FileUtil.class);
 
@@ -37,5 +38,17 @@ public class FileUtil {
         LOG.error("write exception. file={}", filename, e);
       }
     };
+  }
+
+  public static byte[] readFile(String path) throws IOException {
+    try (var fin = new FileInputStream(path)) {
+      return fin.readAllBytes();
+    }
+  }
+
+  public static void writeFile(String path, byte[] data) throws IOException {
+    try (var fout = new FileOutputStream(path)) {
+      fout.write(data);
+    }
   }
 }
